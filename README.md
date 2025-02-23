@@ -1,6 +1,6 @@
 # yg-uoslib
 
-An Electron application with Vue and TypeScript
+An unofficial application for store and watch content from sociallib.
 
 ## Recommended IDE Setup
 
