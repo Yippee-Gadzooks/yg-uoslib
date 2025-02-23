@@ -32,3 +32,11 @@ $ npm run build:mac
 # For Linux
 $ npm run build:linux
 ```
+
+## Disclamer
+
+This program is a tool for viewing and downloading data from an open source.
+
+We do not store, distribute, or guarantee anything.
+
+All responsibility for using the program lies with the user.
