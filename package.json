@@ -1,10 +1,10 @@
 {
   "name": "yg-uoslib",
   "version": "1.0.0",
-  "description": "An Electron application with Vue and TypeScript",
+  "description": "An unofficial application for store and watch content from sociallib.",
   "main": "./out/main/index.js",
-  "author": "example.com",
-  "homepage": "https://electron-vite.org",
+  "author": "Yippee-Gadzooks",
+  "homepage": "https://github.com/Yippee-Gadzooks/yg-uoslib",
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint --cache --fix .",
