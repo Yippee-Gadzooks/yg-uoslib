@@ -2,6 +2,7 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { objectManager, siteManager, userManager, catalogManager } from './api'
 
 function createWindow(): void {
