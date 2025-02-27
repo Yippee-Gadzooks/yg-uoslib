@@ -8,9 +8,11 @@ onMounted(() => {
 })
 </script>
 <template>
-  <strong>Current route path:</strong> {{ $route.fullPath }}
+  <strong>Current route path: </strong>
+  {{ $route.fullPath }}
   <br />
-  <strong>Current user id:</strong> {{ userId }}
+  <strong>Current user id: </strong>
+  <RouterLink :to="`/user/${userId}`">{{ userId }}</RouterLink>
   <nav>
     <RouterLink to="/">Go to home</RouterLink>
     <br />
