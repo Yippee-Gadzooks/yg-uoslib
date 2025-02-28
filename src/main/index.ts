@@ -54,6 +54,14 @@ app.whenReady().then(() => {
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
 
+  // catalog
+  ipcMain.handle('getMangaObjects', async (_event, query) => {
+    return await catalogManager.getMangaObjects(query)
+  })
+  ipcMain.handle('getAnimeObjects', async (_event, query) => {
+    return await catalogManager.getAnimeObjects(query)
+  })
+
   createWindow()
 
   app.on('activate', function () {

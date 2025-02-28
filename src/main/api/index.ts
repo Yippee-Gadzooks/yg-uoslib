@@ -20,7 +20,7 @@ const generateUserAgent = (): string => {
   const randomBrowser = browserList[Math.floor(Math.random() * browserList.length)]
   return `Mozilla/5.0 (${randomOS}) AppleWebKit/537.36 (KHTML, like Gecko) ${randomBrowser} Safari/537.36`
 }
-const userAgent = generateUserAgent()
+const userAgent = generateUserAgent() // may be changed by real from renderer, but not now
 
 const config = { baseUrl: 'api.lib.social', userAgent: userAgent }
 
