@@ -5,8 +5,8 @@ import { useThemeStore } from '../stores/theme'
 const themeStore = useThemeStore()
 
 const query = ref('')
-const animeList = ref({})
-const mangaList = ref({})
+const animeList = ref(JSON.parse('{}'))
+const mangaList = ref(JSON.parse('{}'))
 
 const searchObjects = async (): Promise<void> => {
   const anime = await window.electron.ipcRenderer.invoke('getAnimeObjects', query.value, undefined)
@@ -55,8 +55,8 @@ const searchObjects = async (): Promise<void> => {
               :to="{
                 name: 'Object',
                 params: {
-                  slug_url: anime.slug_url,
-                  model: anime.model
+                  model: anime.model,
+                  slug_url: anime.slug_url
                 }
               }"
               class="text-blue-600 font-semibold text-sm dark:text-blue-400"
@@ -90,8 +90,8 @@ const searchObjects = async (): Promise<void> => {
               :to="{
                 name: 'Object',
                 params: {
-                  slug_url: manga.slug_url,
-                  model: manga.model
+                  model: manga.model,
+                  slug_url: manga.slug_url
                 }
               }"
               class="text-blue-600 font-semibold text-sm dark:text-blue-400"
