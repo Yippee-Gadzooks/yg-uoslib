@@ -1,3 +1,5 @@
+import { generateRefferer } from './utils'
+
 interface Config {
   baseUrl: string
   userAgent: string
@@ -5,25 +7,23 @@ interface Config {
 }
 
 // siteid : name ; 1 : manga ; 2 : slash ; 3 : ranobe ; 4: hentai ; 5: anime ;
-// query = encodeURIComponent(query)
-// ?fields[]=rate_avg&fields[]=rate&fields[]=releaseDate&q=${query}&site_id[]=1&site_id[]=2&site_id[]=3&site_id[]=4
 
 export class CatalogManager {
   private config
   constructor(config: Config) {
     this.config = config
   }
-  async getMangaObjects(query: string): Promise<string> {
+  async getMangaObjects(
+    query: string,
+    fields: string[] = ['rate_avg', 'rate', 'releaseDate'],
+    siteIds: number[] = [1, 2, 3, 4]
+  ): Promise<string> {
     const params = [
       `q=${encodeURIComponent(query)}`,
-      'fields[]=rate_avg',
-      'fields[]=rate',
-      'fields[]=releaseDate',
-      'site_id[]=1',
-      'site_id[]=2',
-      'site_id[]=3',
-      'site_id[]=4'
+      ...fields.map((field) => `fields[]=${encodeURIComponent(field)}`),
+      ...siteIds.map((siteId) => `site_id[]=${siteId}`)
     ].join('&')
+
     try {
       const response = await fetch(
         `https://${this.config.baseUrl}/api/manga?${params.toString()}`,
@@ -40,7 +40,7 @@ export class CatalogManager {
             'Sec-Fetch-Mode': 'cors',
             'Sec-Fetch-Site': 'cross-site'
           },
-          referrer: 'https://mangalib.me/',
+          referrer: generateRefferer('manga'),
           method: 'GET',
           mode: 'cors'
         }
@@ -57,13 +57,15 @@ export class CatalogManager {
     }
   }
 
-  async getAnimeObjects(query: string): Promise<string> {
+  async getAnimeObjects(
+    query: string,
+    fields: string[] = ['rate_avg', 'rate', 'releaseDate']
+  ): Promise<string> {
     const params = [
       `q=${encodeURIComponent(query)}`,
-      'fields[]=rate_avg',
-      'fields[]=rate',
-      'fields[]=releaseDate'
+      ...fields.map((field) => `fields[]=${encodeURIComponent(field)}`)
     ].join('&')
+
     try {
       const response = await fetch(
         `https://${this.config.baseUrl}/api/anime?${params.toString()}`,
@@ -80,11 +82,222 @@ export class CatalogManager {
             'Sec-Fetch-Mode': 'cors',
             'Sec-Fetch-Site': 'cross-site'
           },
-          referrer: 'https://anilib.me/',
+          referrer: generateRefferer('anime'),
           method: 'GET',
           mode: 'cors'
         }
       )
+
+      if (!response.ok) {
+        return `{"http": "${response.status}"}`
+      }
+
+      const data = await response.json()
+      return data
+    } catch (error) {
+      return `{"error": "${error}"}`
+    }
+  }
+
+  async getTeams(query: string): Promise<string> {
+    const params = [`q=${encodeURIComponent(query)}`].join('&')
+    try {
+      const response = await fetch(
+        `https://${this.config.baseUrl}/api/teams?${params.toString()}`,
+        {
+          credentials: 'include',
+          headers: {
+            'User-Agent': this.config.userAgent,
+            Accept: '*/*',
+            'Accept-Language': 'ru-RU,en-US,en',
+            'Content-Type': 'application/json',
+            'Site-Id': '5',
+            'Client-Time-Zone': Intl.DateTimeFormat().resolvedOptions().timeZone,
+            'Sec-Fetch-Dest': 'empty',
+            'Sec-Fetch-Mode': 'cors',
+            'Sec-Fetch-Site': 'cross-site'
+          },
+          referrer: generateRefferer('anime'),
+          method: 'GET',
+          mode: 'cors'
+        }
+      )
+
+      if (!response.ok) {
+        return `{"http": "${response.status}"}`
+      }
+
+      const data = await response.json()
+      return data
+    } catch (error) {
+      return `{"error": "${error}"}`
+    }
+  }
+
+  async getCharacter(query: string): Promise<string> {
+    const params = [`q=${encodeURIComponent(query)}`].join('&')
+    try {
+      const response = await fetch(
+        `https://${this.config.baseUrl}/api/character?${params.toString()}`,
+        {
+          credentials: 'include',
+          headers: {
+            'User-Agent': this.config.userAgent,
+            Accept: '*/*',
+            'Accept-Language': 'ru-RU,en-US,en',
+            'Content-Type': 'application/json',
+            'Site-Id': '5',
+            'Client-Time-Zone': Intl.DateTimeFormat().resolvedOptions().timeZone,
+            'Sec-Fetch-Dest': 'empty',
+            'Sec-Fetch-Mode': 'cors',
+            'Sec-Fetch-Site': 'cross-site'
+          },
+          referrer: generateRefferer('anime'),
+          method: 'GET',
+          mode: 'cors'
+        }
+      )
+
+      if (!response.ok) {
+        return `{"http": "${response.status}"}`
+      }
+
+      const data = await response.json()
+      return data
+    } catch (error) {
+      return `{"error": "${error}"}`
+    }
+  }
+
+  async getPeople(query: string): Promise<string> {
+    const params = [`q=${encodeURIComponent(query)}`].join('&')
+    try {
+      const response = await fetch(
+        `https://${this.config.baseUrl}/api/people?${params.toString()}`,
+        {
+          credentials: 'include',
+          headers: {
+            'User-Agent': this.config.userAgent,
+            Accept: '*/*',
+            'Accept-Language': 'ru-RU,en-US,en',
+            'Content-Type': 'application/json',
+            'Site-Id': '5',
+            'Client-Time-Zone': Intl.DateTimeFormat().resolvedOptions().timeZone,
+            'Sec-Fetch-Dest': 'empty',
+            'Sec-Fetch-Mode': 'cors',
+            'Sec-Fetch-Site': 'cross-site'
+          },
+          referrer: generateRefferer('anime'),
+          method: 'GET',
+          mode: 'cors'
+        }
+      )
+
+      if (!response.ok) {
+        return `{"http": "${response.status}"}`
+      }
+
+      const data = await response.json()
+      return data
+    } catch (error) {
+      return `{"error": "${error}"}`
+    }
+  }
+
+  async getFranchise(query: string): Promise<string> {
+    const params = [`q=${encodeURIComponent(query)}`].join('&')
+    try {
+      const response = await fetch(
+        `https://${this.config.baseUrl}/api/franchise?${params.toString()}`,
+        {
+          credentials: 'include',
+          headers: {
+            'User-Agent': this.config.userAgent,
+            Accept: '*/*',
+            'Accept-Language': 'ru-RU,en-US,en',
+            'Content-Type': 'application/json',
+            'Site-Id': '5',
+            'Client-Time-Zone': Intl.DateTimeFormat().resolvedOptions().timeZone,
+            'Sec-Fetch-Dest': 'empty',
+            'Sec-Fetch-Mode': 'cors',
+            'Sec-Fetch-Site': 'cross-site'
+          },
+          referrer: generateRefferer('anime'),
+          method: 'GET',
+          mode: 'cors'
+        }
+      )
+
+      if (!response.ok) {
+        return `{"http": "${response.status}"}`
+      }
+
+      const data = await response.json()
+      return data
+    } catch (error) {
+      return `{"error": "${error}"}`
+    }
+  }
+
+  async getPublisher(query: string): Promise<string> {
+    const params = [`q=${encodeURIComponent(query)}`].join('&')
+    try {
+      const response = await fetch(
+        `https://${this.config.baseUrl}/api/publisher?${params.toString()}`,
+        {
+          credentials: 'include',
+          headers: {
+            'User-Agent': this.config.userAgent,
+            Accept: '*/*',
+            'Accept-Language': 'ru-RU,en-US,en',
+            'Content-Type': 'application/json',
+            'Site-Id': '5',
+            'Client-Time-Zone': Intl.DateTimeFormat().resolvedOptions().timeZone,
+            'Sec-Fetch-Dest': 'empty',
+            'Sec-Fetch-Mode': 'cors',
+            'Sec-Fetch-Site': 'cross-site'
+          },
+          referrer: generateRefferer('anime'),
+          method: 'GET',
+          mode: 'cors'
+        }
+      )
+
+      if (!response.ok) {
+        return `{"http": "${response.status}"}`
+      }
+
+      const data = await response.json()
+      return data
+    } catch (error) {
+      return `{"error": "${error}"}`
+    }
+  }
+
+  async getUser(query: string, sort_by: string = 'id', sort_type: string = 'asc'): Promise<string> {
+    const params = [
+      `q=${encodeURIComponent(query)}`,
+      `sort_by=${sort_by}`,
+      `sort_type=${sort_type}`
+    ].join('&')
+    try {
+      const response = await fetch(`https://${this.config.baseUrl}/api/user?${params.toString()}`, {
+        credentials: 'include',
+        headers: {
+          'User-Agent': this.config.userAgent,
+          Accept: '*/*',
+          'Accept-Language': 'ru-RU,en-US,en',
+          'Content-Type': 'application/json',
+          'Site-Id': '5',
+          'Client-Time-Zone': Intl.DateTimeFormat().resolvedOptions().timeZone,
+          'Sec-Fetch-Dest': 'empty',
+          'Sec-Fetch-Mode': 'cors',
+          'Sec-Fetch-Site': 'cross-site'
+        },
+        referrer: generateRefferer('anime'),
+        method: 'GET',
+        mode: 'cors'
+      })
 
       if (!response.ok) {
         return `{"http": "${response.status}"}`

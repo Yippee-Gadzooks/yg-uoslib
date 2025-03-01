@@ -55,11 +55,46 @@ app.whenReady().then(() => {
   ipcMain.on('ping', () => console.log('pong'))
 
   // catalog
-  ipcMain.handle('getMangaObjects', async (_event, query) => {
-    return await catalogManager.getMangaObjects(query)
+  ipcMain.handle('getMangaObjects', async (_event, query, fields, siteIds) => {
+    return await catalogManager.getMangaObjects(query, fields, siteIds)
   })
-  ipcMain.handle('getAnimeObjects', async (_event, query) => {
-    return await catalogManager.getAnimeObjects(query)
+  ipcMain.handle('getAnimeObjects', async (_event, query, fields) => {
+    return await catalogManager.getAnimeObjects(query, fields)
+  })
+  ipcMain.handle('getTeams', async (_event, query) => {
+    return await catalogManager.getTeams(query)
+  })
+  ipcMain.handle('getCharacter', async (_event, query) => {
+    return await catalogManager.getCharacter(query)
+  })
+  ipcMain.handle('getPeople', async (_event, query) => {
+    return await catalogManager.getPeople(query)
+  })
+  ipcMain.handle('getFranchise', async (_event, query) => {
+    return await catalogManager.getFranchise(query)
+  })
+  ipcMain.handle('getPublisher', async (_event, query) => {
+    return await catalogManager.getPublisher(query)
+  })
+  ipcMain.handle('getUser', async (_event, query, sort_by, sort_type) => {
+    return await catalogManager.getUser(query, sort_by, sort_type)
+  })
+
+  // object
+  ipcMain.handle('getObject', async (_event, fields, model, slug_id) => {
+    return await objectManager.getObject(fields, model, slug_id)
+  })
+  ipcMain.handle('getObjectRelations', async (_event, model, slug_id) => {
+    return await objectManager.getObjectRelations(model, slug_id)
+  })
+  ipcMain.handle('getObjectSimilar', async (_event, model, slug_id) => {
+    return await objectManager.getObjectSimilar(model, slug_id)
+  })
+  ipcMain.handle('getEpisodes', async (_event, model, slug_id) => {
+    return await objectManager.getEpisodes(model, slug_id)
+  })
+  ipcMain.handle('getEpisode', async (_event, model, episode) => {
+    return await objectManager.getEpisode(model, episode)
   })
 
   createWindow()

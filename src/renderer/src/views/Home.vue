@@ -9,9 +9,14 @@ const animeList = ref({})
 const mangaList = ref({})
 
 const searchObjects = async (): Promise<void> => {
-  const anime = await window.electron.ipcRenderer.invoke('getAnimeObjects', query.value)
+  const anime = await window.electron.ipcRenderer.invoke('getAnimeObjects', query.value, undefined)
   animeList.value = anime
-  const manga = await window.electron.ipcRenderer.invoke('getMangaObjects', query.value)
+  const manga = await window.electron.ipcRenderer.invoke(
+    'getMangaObjects',
+    query.value,
+    undefined,
+    undefined
+  )
   mangaList.value = manga
 }
 </script>
