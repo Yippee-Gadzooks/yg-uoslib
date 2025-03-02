@@ -55,29 +55,29 @@ app.whenReady().then(() => {
   ipcMain.on('ping', () => console.log('pong'))
 
   // catalog
-  ipcMain.handle('getMangaObjects', async (_event, query, fields, siteIds) => {
-    return await catalogManager.getMangaObjects(query, fields, siteIds)
+  ipcMain.handle('searchMangaObjects', async (_event, query, fields, siteIds) => {
+    return await catalogManager.searchMangaObjects(query, fields, siteIds)
   })
-  ipcMain.handle('getAnimeObjects', async (_event, query, fields) => {
-    return await catalogManager.getAnimeObjects(query, fields)
+  ipcMain.handle('searchAnimeObjects', async (_event, query, fields) => {
+    return await catalogManager.searchAnimeObjects(query, fields)
   })
-  ipcMain.handle('getTeams', async (_event, query) => {
-    return await catalogManager.getTeams(query)
+  ipcMain.handle('searchTeams', async (_event, query) => {
+    return await catalogManager.searchTeams(query)
   })
-  ipcMain.handle('getCharacter', async (_event, query) => {
-    return await catalogManager.getCharacter(query)
+  ipcMain.handle('searchCharacter', async (_event, query) => {
+    return await catalogManager.searchCharacter(query)
   })
-  ipcMain.handle('getPeople', async (_event, query) => {
-    return await catalogManager.getPeople(query)
+  ipcMain.handle('searchPeople', async (_event, query) => {
+    return await catalogManager.searchPeople(query)
   })
-  ipcMain.handle('getFranchise', async (_event, query) => {
-    return await catalogManager.getFranchise(query)
+  ipcMain.handle('searchFranchise', async (_event, query) => {
+    return await catalogManager.searchFranchise(query)
   })
-  ipcMain.handle('getPublisher', async (_event, query) => {
-    return await catalogManager.getPublisher(query)
+  ipcMain.handle('searchPublisher', async (_event, query) => {
+    return await catalogManager.searchPublisher(query)
   })
-  ipcMain.handle('getUser', async (_event, query, sort_by, sort_type) => {
-    return await catalogManager.getUser(query, sort_by, sort_type)
+  ipcMain.handle('searchUser', async (_event, query, sort_by, sort_type) => {
+    return await catalogManager.searchUser(query, sort_by, sort_type)
   })
 
   // object
@@ -95,6 +95,23 @@ app.whenReady().then(() => {
   })
   ipcMain.handle('getEpisode', async (_event, model, episode) => {
     return await objectManager.getEpisode(model, episode)
+  })
+
+  // user
+  ipcMain.handle('getUser', async (_event, fields, user_id) => {
+    return await userManager.getUser(fields, user_id)
+  })
+  ipcMain.handle('getUserStats', async (_event, user_id) => {
+    return await userManager.getUserStats(user_id)
+  })
+  ipcMain.handle('getUserBookmarks', async (_event, page, sort_by, sort_type, status, user_id) => {
+    return await userManager.getUserBookmarks(page, sort_by, sort_type, status, user_id)
+  })
+  ipcMain.handle('getUserComments', async (_event, page, sort_by, sort_type, user_id) => {
+    return await userManager.getUserComments(page, sort_by, sort_type, user_id)
+  })
+  ipcMain.handle('getUserFriendship', async (_event, page, status, user_id) => {
+    return await userManager.getUserFriendship(page, status, user_id)
   })
 
   createWindow()

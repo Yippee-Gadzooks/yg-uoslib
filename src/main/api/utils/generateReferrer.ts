@@ -18,7 +18,7 @@ export const generateRefferer = (model: string = 'anime'): string => {
       refferer = 'https://hentailib.me/'
       break
     default:
-      refferer = 'https://anilib.me/' // Default value
+      refferer = 'https://anilib.me/'
   }
 
   return refferer

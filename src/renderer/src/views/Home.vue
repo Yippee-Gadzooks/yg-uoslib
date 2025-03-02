@@ -9,10 +9,14 @@ const animeList = ref(JSON.parse('{}'))
 const mangaList = ref(JSON.parse('{}'))
 
 const searchObjects = async (): Promise<void> => {
-  const anime = await window.electron.ipcRenderer.invoke('getAnimeObjects', query.value, undefined)
+  const anime = await window.electron.ipcRenderer.invoke(
+    'searchAnimeObjects',
+    query.value,
+    undefined
+  )
   animeList.value = anime
   const manga = await window.electron.ipcRenderer.invoke(
-    'getMangaObjects',
+    'searchMangaObjects',
     query.value,
     undefined,
     undefined

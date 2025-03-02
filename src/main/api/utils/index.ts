@@ -1,5 +1,6 @@
 import { generateUserAgent } from './generateUserAgent'
 import { generateRefferer } from './generateReferrer'
-import { generateGetObjectFieldsBasedOnModel } from './generateGetObjectFieldsBasedOnModel'
+import { generateFieldsBasedOnModel } from './generateFieldsBasedOnModel'
+import { generateSiteId } from './generateSiteId'
 
-export { generateUserAgent, generateRefferer, generateGetObjectFieldsBasedOnModel }
+export { generateUserAgent, generateRefferer, generateFieldsBasedOnModel, generateSiteId }

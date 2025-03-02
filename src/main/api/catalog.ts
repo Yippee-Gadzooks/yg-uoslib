@@ -1,4 +1,4 @@
-import { generateRefferer } from './utils'
+import { generateRefferer, generateSiteId } from './utils'
 
 interface Config {
   baseUrl: string
@@ -13,7 +13,7 @@ export class CatalogManager {
   constructor(config: Config) {
     this.config = config
   }
-  async getMangaObjects(
+  async searchMangaObjects(
     query: string,
     fields: string[] = ['rate_avg', 'rate', 'releaseDate'],
     siteIds: number[] = [1, 2, 3, 4]
@@ -33,7 +33,7 @@ export class CatalogManager {
             'User-Agent': this.config.userAgent,
             Accept: '*/*',
             'Accept-Language': 'ru-RU,en-US,en', //navigator.languages.join(','),
-            'Site-Id': '1',
+            'Site-Id': generateSiteId('manga'),
             'Content-Type': 'application/json',
             'Client-Time-Zone': Intl.DateTimeFormat().resolvedOptions().timeZone,
             'Sec-Fetch-Dest': 'empty',
@@ -57,7 +57,7 @@ export class CatalogManager {
     }
   }
 
-  async getAnimeObjects(
+  async searchAnimeObjects(
     query: string,
     fields: string[] = ['rate_avg', 'rate', 'releaseDate']
   ): Promise<string> {
@@ -76,7 +76,7 @@ export class CatalogManager {
             Accept: '*/*',
             'Accept-Language': 'ru-RU,en-US,en',
             'Content-Type': 'application/json',
-            'Site-Id': '5',
+            'Site-Id': generateSiteId('anime'),
             'Client-Time-Zone': Intl.DateTimeFormat().resolvedOptions().timeZone,
             'Sec-Fetch-Dest': 'empty',
             'Sec-Fetch-Mode': 'cors',
@@ -99,7 +99,7 @@ export class CatalogManager {
     }
   }
 
-  async getTeams(query: string): Promise<string> {
+  async searchTeams(query: string): Promise<string> {
     const params = [`q=${encodeURIComponent(query)}`].join('&')
     try {
       const response = await fetch(
@@ -111,7 +111,7 @@ export class CatalogManager {
             Accept: '*/*',
             'Accept-Language': 'ru-RU,en-US,en',
             'Content-Type': 'application/json',
-            'Site-Id': '5',
+            'Site-Id': generateSiteId('anime'),
             'Client-Time-Zone': Intl.DateTimeFormat().resolvedOptions().timeZone,
             'Sec-Fetch-Dest': 'empty',
             'Sec-Fetch-Mode': 'cors',
@@ -134,7 +134,7 @@ export class CatalogManager {
     }
   }
 
-  async getCharacter(query: string): Promise<string> {
+  async searchCharacter(query: string): Promise<string> {
     const params = [`q=${encodeURIComponent(query)}`].join('&')
     try {
       const response = await fetch(
@@ -146,7 +146,7 @@ export class CatalogManager {
             Accept: '*/*',
             'Accept-Language': 'ru-RU,en-US,en',
             'Content-Type': 'application/json',
-            'Site-Id': '5',
+            'Site-Id': generateSiteId('anime'),
             'Client-Time-Zone': Intl.DateTimeFormat().resolvedOptions().timeZone,
             'Sec-Fetch-Dest': 'empty',
             'Sec-Fetch-Mode': 'cors',
@@ -169,7 +169,7 @@ export class CatalogManager {
     }
   }
 
-  async getPeople(query: string): Promise<string> {
+  async searchPeople(query: string): Promise<string> {
     const params = [`q=${encodeURIComponent(query)}`].join('&')
     try {
       const response = await fetch(
@@ -181,7 +181,7 @@ export class CatalogManager {
             Accept: '*/*',
             'Accept-Language': 'ru-RU,en-US,en',
             'Content-Type': 'application/json',
-            'Site-Id': '5',
+            'Site-Id': generateSiteId('anime'),
             'Client-Time-Zone': Intl.DateTimeFormat().resolvedOptions().timeZone,
             'Sec-Fetch-Dest': 'empty',
             'Sec-Fetch-Mode': 'cors',
@@ -204,7 +204,7 @@ export class CatalogManager {
     }
   }
 
-  async getFranchise(query: string): Promise<string> {
+  async searchFranchise(query: string): Promise<string> {
     const params = [`q=${encodeURIComponent(query)}`].join('&')
     try {
       const response = await fetch(
@@ -216,7 +216,7 @@ export class CatalogManager {
             Accept: '*/*',
             'Accept-Language': 'ru-RU,en-US,en',
             'Content-Type': 'application/json',
-            'Site-Id': '5',
+            'Site-Id': generateSiteId('anime'),
             'Client-Time-Zone': Intl.DateTimeFormat().resolvedOptions().timeZone,
             'Sec-Fetch-Dest': 'empty',
             'Sec-Fetch-Mode': 'cors',
@@ -239,7 +239,7 @@ export class CatalogManager {
     }
   }
 
-  async getPublisher(query: string): Promise<string> {
+  async searchPublisher(query: string): Promise<string> {
     const params = [`q=${encodeURIComponent(query)}`].join('&')
     try {
       const response = await fetch(
@@ -251,7 +251,7 @@ export class CatalogManager {
             Accept: '*/*',
             'Accept-Language': 'ru-RU,en-US,en',
             'Content-Type': 'application/json',
-            'Site-Id': '5',
+            'Site-Id': generateSiteId('anime'),
             'Client-Time-Zone': Intl.DateTimeFormat().resolvedOptions().timeZone,
             'Sec-Fetch-Dest': 'empty',
             'Sec-Fetch-Mode': 'cors',
@@ -274,7 +274,11 @@ export class CatalogManager {
     }
   }
 
-  async getUser(query: string, sort_by: string = 'id', sort_type: string = 'asc'): Promise<string> {
+  async searchUser(
+    query: string,
+    sort_by: string = 'id',
+    sort_type: string = 'asc'
+  ): Promise<string> {
     const params = [
       `q=${encodeURIComponent(query)}`,
       `sort_by=${sort_by}`,
@@ -288,7 +292,7 @@ export class CatalogManager {
           Accept: '*/*',
           'Accept-Language': 'ru-RU,en-US,en',
           'Content-Type': 'application/json',
-          'Site-Id': '5',
+          'Site-Id': generateSiteId('anime'),
           'Client-Time-Zone': Intl.DateTimeFormat().resolvedOptions().timeZone,
           'Sec-Fetch-Dest': 'empty',
           'Sec-Fetch-Mode': 'cors',

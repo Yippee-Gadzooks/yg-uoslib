@@ -1,4 +1,15 @@
 const queryParamsList = {
+  user: [
+    'background',
+    'roles',
+    'points',
+    'ban_info',
+    'gender',
+    'created_at',
+    'about',
+    'teams',
+    'premium_background_id'
+  ],
   manga: [
     'background',
     'eng_name',
@@ -122,6 +133,6 @@ const queryParamsList = {
   ]
 }
 
-export const generateGetObjectFieldsBasedOnModel = (model: string = 'anime'): string[] => {
+export const generateFieldsBasedOnModel = (model: string = 'anime'): string[] => {
   return queryParamsList[model.toLowerCase()] || []
 }

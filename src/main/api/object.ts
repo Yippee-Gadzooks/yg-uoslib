@@ -1,4 +1,4 @@
-import { generateRefferer, generateGetObjectFieldsBasedOnModel } from './utils'
+import { generateRefferer, generateFieldsBasedOnModel, generateSiteId } from './utils'
 
 interface Config {
   baseUrl: string
@@ -13,7 +13,7 @@ export class ObjectManager {
   }
   async getObject(fields: string[] = [], model: string, slug_id: string): Promise<string> {
     if (fields.length === 0) {
-      fields = generateGetObjectFieldsBasedOnModel(model)
+      fields = generateFieldsBasedOnModel(model)
     }
     const params = fields.map((field) => `fields[]=${encodeURIComponent(field)}`).join('&')
     try {
@@ -25,7 +25,7 @@ export class ObjectManager {
             'User-Agent': this.config.userAgent,
             Accept: '*/*',
             'Accept-Language': 'ru-RU,en-US,en',
-            'Site-Id': '1',
+            'Site-Id': generateSiteId(model),
             'Content-Type': 'application/json',
             'Client-Time-Zone': Intl.DateTimeFormat().resolvedOptions().timeZone,
             'Sec-Fetch-Dest': 'empty',
@@ -59,7 +59,7 @@ export class ObjectManager {
             'User-Agent': this.config.userAgent,
             Accept: '*/*',
             'Accept-Language': 'ru-RU,en-US,en',
-            'Site-Id': '1',
+            'Site-Id': generateSiteId(model),
             'Content-Type': 'application/json',
             'Client-Time-Zone': Intl.DateTimeFormat().resolvedOptions().timeZone,
             'Sec-Fetch-Dest': 'empty',
@@ -93,7 +93,7 @@ export class ObjectManager {
             'User-Agent': this.config.userAgent,
             Accept: '*/*',
             'Accept-Language': 'ru-RU,en-US,en',
-            'Site-Id': '1',
+            'Site-Id': generateSiteId(model),
             'Content-Type': 'application/json',
             'Client-Time-Zone': Intl.DateTimeFormat().resolvedOptions().timeZone,
             'Sec-Fetch-Dest': 'empty',
@@ -128,7 +128,7 @@ export class ObjectManager {
             'User-Agent': this.config.userAgent,
             Accept: '*/*',
             'Accept-Language': 'ru-RU,en-US,en',
-            'Site-Id': '1',
+            'Site-Id': generateSiteId(model),
             'Content-Type': 'application/json',
             'Client-Time-Zone': Intl.DateTimeFormat().resolvedOptions().timeZone,
             'Sec-Fetch-Dest': 'empty',
@@ -160,7 +160,7 @@ export class ObjectManager {
           'User-Agent': this.config.userAgent,
           Accept: '*/*',
           'Accept-Language': 'ru-RU,en-US,en',
-          'Site-Id': '1',
+          'Site-Id': generateSiteId(model),
           'Content-Type': 'application/json',
           'Client-Time-Zone': Intl.DateTimeFormat().resolvedOptions().timeZone,
           'Sec-Fetch-Dest': 'empty',
