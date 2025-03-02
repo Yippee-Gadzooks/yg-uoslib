@@ -16,7 +16,6 @@ export class UserManager {
       fields = generateFieldsBasedOnModel('user')
     }
     const params = fields.map((field) => `fields[]=${encodeURIComponent(field)}`).join('&')
-    console.log(params, fields, userId)
     try {
       const response = await fetch(
         `https://${this.config.baseUrl}/api/user/${userId}?${params.toString()}`,
