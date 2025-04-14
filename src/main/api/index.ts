@@ -7,7 +7,7 @@ import { generateUserAgent } from './utils'
 
 const userAgent = generateUserAgent() // may be changed by real from renderer, but not now
 
-const config = { baseUrl: 'api.lib.social', userAgent: userAgent }
+const config = { baseUrl: 'api.cdnlibs.org', userAgent: userAgent } //api.lib.social //api2.mangalib.me
 
 const objectManager = new ObjectManager(config)
 const siteManager = new SiteManager(config)

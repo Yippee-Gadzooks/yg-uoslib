@@ -6,6 +6,8 @@ An unofficial application for store and watch content from sociallib.
 
 - [VSCode](https://code.visualstudio.com/) + [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) + [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin)
 
+## Docs resources
+
 ## Project Setup
 
 ### Install
@@ -14,10 +16,18 @@ An unofficial application for store and watch content from sociallib.
 $ npm install
 ```
 
+```bash
+$ pnpm install
+```
+
 ### Development
 
 ```bash
 $ npm run dev
+```
+
+```bash
+$ pnpm run dev
 ```
 
 ### Build
@@ -31,6 +41,17 @@ $ npm run build:mac
 
 # For Linux
 $ npm run build:linux
+```
+
+```bash
+# For windows
+$ pnpm run build:win
+
+# For macOS
+$ pnpm run build:mac
+
+# For Linux
+$ pnpm run build:linux
 ```
 
 ## Disclamer
