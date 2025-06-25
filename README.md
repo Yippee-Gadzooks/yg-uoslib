@@ -56,7 +56,7 @@ $ pnpm run build:linux
 
 ## Disclamer
 
-This program is a tool for viewing and downloading data from an social-lib.
+This program is a tool for viewing and downloading data from Sociallib.
 
 We do not store, distribute, or guarantee anything.
 
