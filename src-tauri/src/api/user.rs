@@ -10,6 +10,7 @@ pub struct UserManager {
     client: reqwest::Client,
 }
 
+// Работа с юзером, данными юзера
 impl UserManager {
     pub fn new(config: &Config, client: reqwest::Client) -> Self {
         Self {
@@ -29,7 +30,7 @@ impl UserManager {
             None,
             Some(fields.iter().map(AsRef::as_ref).collect()),
         );
-        generate_request(&self.client, &url, "anime", &generate_user_agent()).await
+        generate_request(&self.client, &url, "anime", &self.config.user_agent).await
     }
 
     /// Юзер статс, ну там любимые теги и тд
@@ -42,7 +43,7 @@ impl UserManager {
             None,
         );
         dbg!(&url);
-        generate_request(&self.client, &url, "anime", &generate_user_agent()).await
+        generate_request(&self.client, &url, "anime", &self.config.user_agent).await
     }
 
     /// Буквал букмарки
@@ -70,7 +71,7 @@ impl UserManager {
             None,
         );
 
-        generate_request(&self.client, &url, "anime", &generate_user_agent()).await
+        generate_request(&self.client, &url, "anime", &self.config.user_agent).await
     }
 
     /// Коменты юзера
@@ -97,7 +98,7 @@ impl UserManager {
             None,
         );
 
-        generate_request(&self.client, &url, "anime", &generate_user_agent()).await
+        generate_request(&self.client, &url, "anime", &self.config.user_agent).await
     }
 
     /// Друзья юзера
@@ -121,6 +122,6 @@ impl UserManager {
             None,
         );
 
-        generate_request(&self.client, &url, "anime", &generate_user_agent()).await
+        generate_request(&self.client, &url, "anime", &self.config.user_agent).await
     }
 }

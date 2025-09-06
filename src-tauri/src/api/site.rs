@@ -6,6 +6,7 @@ pub struct SiteManager {
     client: reqwest::Client,
 }
 
+// Работа с сайтом, скачивание, получение, всякие вот эти, файлы, остальное
 impl SiteManager {
     pub fn new(config: &Config, client: reqwest::Client) -> Self {
         Self {

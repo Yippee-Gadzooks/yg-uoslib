@@ -23,10 +23,10 @@ pub struct Managers {
 
 impl Managers {
     pub fn new() -> Self {
-        let user_agent = generate_user_agent::generate_user_agent();
+        let user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36 Edg/138.0.0.0"; // generate_user_agent::generate_user_agent();
         let config = Config {
             base_url: "api.cdnlibs.org".to_string(),
-            user_agent,
+            user_agent: user_agent.to_string(),
         };
 
         let client = Client::new();

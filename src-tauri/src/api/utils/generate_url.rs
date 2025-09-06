@@ -61,10 +61,7 @@ pub fn generate_restapi(template: &str, path_params: &[(&str, &str)]) -> String 
 }
 
 /// Генерирует query-параметры из пар ключ-значение и списка полей
-pub fn generate_queries(
-    queries: Option<Vec<(&str, &str)>>,
-    fields: Option<Vec<&str>>,
-) -> String {
+pub fn generate_queries(queries: Option<Vec<(&str, &str)>>, fields: Option<Vec<&str>>) -> String {
     let mut parts = Vec::new();
 
     // Обычные параметры типа ключ=значение

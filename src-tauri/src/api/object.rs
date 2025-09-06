@@ -10,6 +10,7 @@ pub struct ObjectManager {
     client: reqwest::Client,
 }
 
+// Для получения обьектов, информации, и просто данных
 impl ObjectManager {
     pub fn new(config: &Config, client: reqwest::Client) -> Self {
         Self {
@@ -34,7 +35,7 @@ impl ObjectManager {
             Some(fields.iter().map(AsRef::as_ref).collect()),
         );
 
-        generate_request(&self.client, &url, &model, &generate_user_agent()).await
+        generate_request(&self.client, &url, &model, &self.config.user_agent).await
     }
 
     /// Получает родственников обьекта (связаные тайтлы), использует слаг айди и модель.
@@ -51,7 +52,7 @@ impl ObjectManager {
             None,
         );
 
-        generate_request(&self.client, &url, &model, &generate_user_agent()).await
+        generate_request(&self.client, &url, &model, &self.config.user_agent).await
     }
 
     /// Получает похожих обьекта (тайтлы что похожы по тегам, любителям, смыслу и всякому такому), использует слаг айди и модель.
@@ -68,7 +69,7 @@ impl ObjectManager {
             None,
         );
 
-        generate_request(&self.client, &url, &model, &generate_user_agent()).await
+        generate_request(&self.client, &url, &model, &self.config.user_agent).await
     }
 
     /// Получает епизоды обьекта, использует слаг айди и модель, скорее всего аниме онли.
@@ -85,7 +86,7 @@ impl ObjectManager {
             None,
         );
 
-        generate_request(&self.client, &url, &model, &generate_user_agent()).await
+        generate_request(&self.client, &url, &model, &self.config.user_agent).await
     }
     /// Получает епизод обьекта (сам список видеопотоков), использует епизоде айди и модель, скорее всего аниме онли.
     pub async fn get_object_episode(
@@ -101,6 +102,6 @@ impl ObjectManager {
             None,
         );
 
-        generate_request(&self.client, &url, &model, &generate_user_agent()).await
+        generate_request(&self.client, &url, &model, &self.config.user_agent).await
     }
 }
